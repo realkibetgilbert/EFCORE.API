@@ -1,3 +1,4 @@
+using EFCORE.API.Helpers;
 using EFCORE.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,8 +12,12 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 #region Registering Services
+builder.Services.AddAutoMapper(typeof(MappingProfile));
 
 builder.Services.AddDbContextPool<ApplicationContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("EfCoreConnectionString")));
+builder.Services.AddControllers()
+     .AddNewtonsoftJson(o => o.SerializerSettings.ReferenceLoopHandling =
+      Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
 #endregion
 
