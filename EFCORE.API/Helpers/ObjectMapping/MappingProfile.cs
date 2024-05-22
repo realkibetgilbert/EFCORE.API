@@ -2,7 +2,7 @@
 using EFCORE.API.Dtos;
 using MODEL;
 
-namespace EFCORE.API.Helpers
+namespace EFCORE.API.Helpers.ObjectMapping
 {
     public class MappingProfile : Profile
     {

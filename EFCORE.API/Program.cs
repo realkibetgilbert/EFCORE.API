@@ -1,5 +1,9 @@
-using EFCORE.API.Helpers;
+using EFCORE.API.Dtos;
+using EFCORE.API.Helpers.FluentValidation;
+using EFCORE.API.Helpers.ObjectMapping;
 using EFCORE.Infrastructure;
+using EFCORE.Infrastructure.Migrations;
+using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,10 +18,13 @@ builder.Services.AddSwaggerGen();
 #region Registering Services
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 
+builder.Services.AddScoped<IValidator<StudentToCreateDto>, StudentRegistrationValidator>();
+
 builder.Services.AddDbContextPool<ApplicationContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("EfCoreConnectionString")));
 builder.Services.AddControllers()
      .AddNewtonsoftJson(o => o.SerializerSettings.ReferenceLoopHandling =
       Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+
 
 #endregion
 
