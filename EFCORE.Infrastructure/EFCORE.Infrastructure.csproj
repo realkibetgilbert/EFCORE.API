@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\EFCOREAPI.CORE\EFCOREAPI.CORE.csproj" />
     <ProjectReference Include="..\MODEL\MODEL.csproj" />
   </ItemGroup>
 

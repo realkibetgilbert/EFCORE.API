@@ -3,6 +3,8 @@ using EFCORE.API.Helpers.FluentValidation;
 using EFCORE.API.Helpers.ObjectMapping;
 using EFCORE.Infrastructure;
 using EFCORE.Infrastructure.Migrations;
+using EFCORE.Infrastructure.Sqlserverimplementations;
+using EFCOREAPI.CORE.Interfaces;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,7 +16,9 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
+#region Registering InMemory Cache
+builder.Services.AddMemoryCache();
+#endregion
 #region Registering Services
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 
@@ -26,6 +30,7 @@ builder.Services.AddControllers()
       Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
 
+builder.Services.AddScoped<IStudentService, StudentService>();
 #endregion
 
 var app = builder.Build();
